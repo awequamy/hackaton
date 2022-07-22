@@ -85,7 +85,6 @@ class Cars():
         cls.send_data_to_json(data)
         return{'status':'200','msg':'Updated'}
 
-
     @classmethod
     def delete_data(cls,id):
         data=cls.get_data()
@@ -104,7 +103,7 @@ with open(Cars.FILE,'w') as file:
 
 def main():
     print('1)Create a car\n2)Get data about all the cars\n3)Retrieve data about one car\n4)Update car\n5)Delete car')
-    a=int(input('Выберите действие:'))
+    a=int(input('Choose an action:'))
     if a == 1:
         brand=input('Brand:')
         model=input('Model:')
@@ -147,7 +146,6 @@ def main():
         else:
             print('Error')
             main()
-
     elif a==3:
         object=int(input('Enter object index:'))
         print(Cars.retrieve_data(object))
@@ -161,9 +159,12 @@ def main():
             main()
         
     elif a==4:
-        object=int(input('Enter object index:'))
-        kwargs=input('What do you want to change?')
-        print(Cars.update_data(object, kwargs))
+        id=int(input('Enter object index:'))
+        kwargs = {}
+        obj = input('What do you want to change?')
+        val = input('What value do you want to change: ')
+        kwargs[obj] = val
+        print(Cars.update_data(id, **kwargs))
         q=int(input('do u want to continue?(1-yes,2-no)'))
         if q=='1':
             main()
@@ -195,8 +196,5 @@ def main():
         else:
             print('Error')
             main()
-        
-    
+
 main()
-
-
